@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vitor dos Santos | Desenvolvedor Full Stack</title>
+  <meta name="description" content="Desenvolvedor Full Stack especializado em criar soluções modernas e escaláveis." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            accent: '#0EA5E9',
+            'accent-dark': '#0284C7',
+            dark: '#0A0A0F',
+            'dark-2': '#111118',
+            'dark-3': '#1A1A24',
+            'dark-4': '#22222E',
+            muted: '#6B7280',
+            'muted-light': '#9CA3AF',
+          },
+          animation: {
+            'fade-up': 'fadeUp 0.7s ease forwards',
+            'fade-in': 'fadeIn 0.5s ease forwards',
+            'slide-in': 'slideIn 0.8s ease forwards',
+            'float': 'float 4s ease-in-out infinite',
+          },
+          keyframes: {
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(24px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideIn: {
+              '0%': { opacity: '0', transform: 'translateX(-32px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' },
+            },
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { font-family: 'DM Sans', sans-serif; }
+    .font-display { font-family: 'Syne', sans-serif; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #0EA5E9 0%, #38BDF8 50%, #7DD3FC 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+    }
+
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: #0EA5E9;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(14,165,233,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14,165,233,0.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    .glow-circle {
+      background: radial-gradient(circle, rgba(14,165,233,0.2) 0%, transparent 70%);
+    }
+
+    .skill-bar-fill {
+      transition: width 1s ease;
+    }
+
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .section-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0A0A0F; }
+    ::-webkit-scrollbar-thumb { background: #0EA5E9; border-radius: 3px; }
+  </style>
+</head>
+
+<body class="bg-dark text-white font-body antialiased">
+
+  <!-- ── NAVBAR ── -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-dark/80 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+      <a href="#hero" class="font-display font-bold text-xl tracking-tight">
+        <span class="gradient-text">VT</span><span class="text-white">.</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm text-muted-light">
+        <a href="#sobre" class="nav-link hover:text-white transition-colors">Sobre</a>
+        <a href="#servicos" class="nav-link hover:text-white transition-colors">Serviços</a>
+        <a href="#habilidades" class="nav-link hover:text-white transition-colors">Skills</a>
+        <a href="#contato" class="nav-link hover:text-white transition-colors">Contato</a>
+      </div>
+      <a href="#contato"
+         class="text-sm font-medium px-5 py-2 rounded-full bg-accent hover:bg-accent-dark text-white transition-colors">
+        Fale comigo
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero" class="min-h-screen flex items-center relative overflow-hidden hero-grid">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 glow-circle pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-72 h-72 glow-circle pointer-events-none opacity-50"></div>
+
+    <div class="max-w-6xl mx-auto px-6 pt-20 pb-16 grid md:grid-cols-2 gap-16 items-center w-full">
+      <div>
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-medium mb-8 animate-fade-in">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+          Disponível para novos projetos
+        </div>
+
+        <h1 class="font-display text-5xl md:text-6xl font-bold leading-[1.05] mb-6 animate-fade-up" style="animation-delay:0.1s">
+          Olá, sou<br/>
+          <span class="gradient-text">Vitor dos Santos</span>
+        </h1>
+
+        <p class="text-muted-light text-lg leading-relaxed mb-10 animate-fade-up" style="animation-delay:0.2s">
+          Desenvolvedor Full Stack apaixonado por transformar ideias em produtos digitais modernos, performáticos e escaláveis.
+        </p>
+
+        <div class="flex flex-wrap gap-4 animate-fade-up" style="animation-delay:0.3s">
+          <a href="#servicos"
+             class="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent hover:bg-accent-dark text-white font-medium transition-all hover:shadow-lg hover:shadow-accent/25">
+            Ver serviços
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+          <a href="#sobre"
+             class="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-white/15 hover:border-white/30 text-white font-medium transition-all">
+            Sobre mim
+          </a>
+        </div>
+
+        <div class="flex items-center gap-8 mt-12 animate-fade-up" style="animation-delay:0.4s">
+          <div>
+            <p class="font-display font-bold text-3xl text-white">5+</p>
+            <p class="text-xs text-muted mt-0.5">Anos de experiência</p>
+          </div>
+          <div class="w-px h-10 bg-white/10"></div>
+          <div>
+            <p class="font-display font-bold text-3xl text-white">40+</p>
+            <p class="text-xs text-muted mt-0.5">Projetos entregues</p>
+          </div>
+          <div class="w-px h-10 bg-white/10"></div>
+          <div>
+            <p class="font-display font-bold text-3xl text-white">20+</p>
+            <p class="text-xs text-muted mt-0.5">Clientes satisfeitos</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center animate-float">
+        <div class="relative">
+          <div class="w-72 h-72 md:w-80 md:h-80 rounded-3xl overflow-hidden border-2 border-accent/30 shadow-2xl shadow-accent/20">
+            <div class="w-full h-full bg-gradient-to-br from-dark-3 via-dark-4 to-dark-2 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-28 h-28 rounded-full bg-gradient-to-br from-accent/40 to-accent/10 border-2 border-accent/40 mx-auto mb-4 flex items-center justify-center">
+                  <span class="font-display text-4xl font-bold gradient-text">JS</span>
+                </div>
+                <p class="text-muted-light text-sm">Foto aqui</p>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-accent animate-pulse"></div>
+          <div class="absolute -bottom-3 -left-3 w-5 h-5 rounded-full bg-accent/40"></div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#sobre" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-muted animate-bounce">
+      <span class="text-xs">Scroll</span>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- ── SOBRE ── -->
+  <section id="sobre" class="py-28 bg-dark-2">
+    <div class="max-w-6xl mx-auto px-6 section-reveal">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div>
+          <p class="text-accent text-sm font-medium uppercase tracking-widest mb-3">Sobre mim</p>
+          <h2 class="font-display text-4xl font-bold mb-6 leading-snug">
+            Código com propósito,<br/>design com intenção
+          </h2>
+          <p class="text-muted-light leading-relaxed mb-4">
+            Sou desenvolvedor Full Stack com mais de 5 anos de experiência construindo aplicações web modernas.
+            Minha paixão é resolver problemas complexos com soluções elegantes e de alta performance.
+          </p>
+          <p class="text-muted-light leading-relaxed mb-8">
+            Trabalho com startups e empresas de médio porte para transformar visões em produtos digitais
+            que realmente funcionam — tanto tecnicamente quanto para o usuário final.
+          </p>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-dark-3 border border-white/5">
+              <p class="text-white font-medium text-sm mb-1">📍 Localização</p>
+              <p class="text-muted text-sm">Rio de Janeiro, Brasil</p>
+            </div>
+            <div class="p-4 rounded-xl bg-dark-3 border border-white/5">
+              <p class="text-white font-medium text-sm mb-1">💼 Disponibilidade</p>
+              <p class="text-accent text-sm">Aberto a projetos</p>
+            </div>
+            <div class="p-4 rounded-xl bg-dark-3 border border-white/5">
+              <p class="text-white font-medium text-sm mb-1">🎓 Formação</p>
+              <p class="text-muted text-sm">Analise e Desenvolvimento de Sistema</p>
+            </div>
+            <div class="p-4 rounded-xl bg-dark-3 border border-white/5">
+              <p class="text-white font-medium text-sm mb-1">🌐 Idiomas</p>
+              <p class="text-muted text-sm">PT · EN · ES</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="habilidades">
+          <p class="text-accent text-sm font-medium uppercase tracking-widest mb-5">Habilidades técnicas</p>
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="text-white">React / Next.js</span>
+                <span class="text-muted">95%</span>
+              </div>
+              <div class="h-1.5 bg-dark-4 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-accent to-sky-400 rounded-full skill-bar-fill" style="width:95%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="text-white">Node.js / API REST</span>
+                <span class="text-muted">90%</span>
+              </div>
+              <div class="h-1.5 bg-dark-4 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-accent to-sky-400 rounded-full" style="width:90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="text-white">TypeScript</span>
+                <span class="text-muted">88%</span>
+              </div>
+              <div class="h-1.5 bg-dark-4 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-accent to-sky-400 rounded-full" style="width:88%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="text-white">PostgreSQL / MongoDB</span>
+                <span class="text-muted">82%</span>
+              </div>
+              <div class="h-1.5 bg-dark-4 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-accent to-sky-400 rounded-full" style="width:82%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="text-white">Docker / AWS</span>
+                <span class="text-muted">75%</span>
+              </div>
+              <div class="h-1.5 bg-dark-4 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-accent to-sky-400 rounded-full" style="width:75%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mt-8">
+            <span class="px-3 py-1 rounded-full text-xs bg-dark-4 text-muted-light border border-white/5">Tailwind CSS</span>
+            <span class="px-3 py-1 rounded-full text-xs bg-dark-4 text-muted-light border border-white/5">GraphQL</span>
+            <span class="px-3 py-1 rounded-full text-xs bg-dark-4 text-muted-light border border-white/5">Redis</span>
+            <span class="px-3 py-1 rounded-full text-xs bg-dark-4 text-muted-light border border-white/5">Git</span>
+            <span class="px-3 py-1 rounded-full text-xs bg-dark-4 text-muted-light border border-white/5">CI/CD</span>
+            <span class="px-3 py-1 rounded-full text-xs bg-dark-4 text-muted-light border border-white/5">Prisma</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVIÇOS ── -->
+  <section id="servicos" class="py-28 bg-dark">
+    <div class="max-w-6xl mx-auto px-6 section-reveal">
+      <div class="text-center mb-16">
+        <p class="text-accent text-sm font-medium uppercase tracking-widest mb-3">O que eu faço</p>
+        <h2 class="font-display text-4xl font-bold">Serviços & Especialidades</h2>
+        <p class="text-muted-light mt-4 max-w-xl mx-auto">
+          Soluções completas do front ao back, focadas em performance, escalabilidade e experiência do usuário.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <div class="p-7 rounded-2xl bg-dark-2 border border-white/5 card-hover group">
+          <div class="w-12 h-12 rounded-xl bg-accent/15 border border-accent/25 flex items-center justify-center mb-5 group-hover:bg-accent/25 transition-colors">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-3 group-hover:text-accent transition-colors">Desenvolvimento Web</h3>
+          <p class="text-muted-light text-sm leading-relaxed mb-4">
+            Aplicações web modernas com React e Next.js — rápidas, acessíveis e otimizadas para SEO.
+          </p>
+          <ul class="space-y-1.5 text-xs text-muted">
+            <li class="flex items-center gap-2"><span class="text-accent">→</span> SPA & SSR com Next.js</li>
+            <li class="flex items-center gap-2"><span class="text-accent">→</span> UI com Tailwind + Radix</li>
+            <li class="flex items-center gap-2"><span class="text-accent">→</span> Animações avançadas</li>
+          </ul>
+        </div>
+
+        <!-- Card 2 (destaque) -->
+        <div class="p-7 rounded-2xl bg-accent/10 border border-accent/30 card-hover group relative overflow-hidden">
+          <div class="absolute top-4 right-4">
+            <span class="text-xs px-2 py-0.5 rounded-full bg-accent text-white font-medium">Popular</span>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-accent/25 border border-accent/40 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/>
+            </svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-3 text-accent">APIs & Back-end</h3>
+          <p class="text-muted-light text-sm leading-relaxed mb-4">
+            APIs RESTful e GraphQL robustas com Node.js, autenticação segura e arquitetura escalável.
+          </p>
+          <ul class="space-y-1.5 text-xs text-muted-light">
+            <li class="flex items-center gap-2"><span class="text-accent">→</span> Node.js + Express / Fastify</li>
+            <li class="flex items-center gap-2"><span class="text-accent">→</span> Auth com JWT & OAuth</li>
+            <li class="flex items-center gap-2"><span class="text-accent">→</span> PostgreSQL & MongoDB</li>
+          </ul>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="p-7 rounded-2xl bg-dark-2 border border-white/5 card-hover group">
+          <div class="w-12 h-12 rounded-xl bg-accent/15 border border-accent/25 flex items-center justify-center mb-5 group-hover:bg-accent/25 transition-colors">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+            </svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-3 group-hover:text-accent transition-colors">DevOps & Cloud</h3>
+          <p class="text-muted-light text-sm leading-relaxed mb-4">
+            Infraestrutura moderna com Docker, CI/CD e deploy na AWS ou Vercel para máxima disponibilidade.
+          </p>
+          <ul class="space-y-1.5 text-xs text-muted">
+            <li class="flex items-center gap-2"><span class="text-accent">→</span> Docker & containers</li>
+            <li class="flex items-center gap-2"><span class="text-accent">→</span> GitHub Actions / CI</li>
+            <li class="flex items-center gap-2"><span class="text-accent">→</span> Deploy AWS / Vercel</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="py-24 bg-dark-2">
+    <div class="max-w-3xl mx-auto px-6 text-center section-reveal">
+      <div class="p-12 rounded-3xl bg-gradient-to-br from-accent/15 via-dark-3 to-dark-4 border border-accent/20 relative overflow-hidden">
+        <div class="absolute inset-0 glow-circle opacity-30"></div>
+        <div class="relative">
+          <p class="text-accent font-medium text-sm uppercase tracking-widest mb-4">Próximo passo</p>
+          <h2 class="font-display text-4xl font-bold mb-5 leading-snug">
+            Vamos construir algo<br/>incrível juntos?
+          </h2>
+          <p class="text-muted-light mb-8 max-w-lg mx-auto leading-relaxed">
+            Estou disponível para novos projetos, parcerias e oportunidades.
+            Vamos conversar sobre como posso ajudar a levar sua ideia ao próximo nível.
+          </p>
+          <a href="#contato"
+             class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-accent hover:bg-accent-dark text-white font-medium text-base transition-all hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5">
+            Iniciar conversa
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTATO ── -->
+  <section id="contato" class="py-28 bg-dark">
+    <div class="max-w-6xl mx-auto px-6 section-reveal">
+      <div class="grid md:grid-cols-2 gap-16 items-start">
+        <div>
+          <p class="text-accent text-sm font-medium uppercase tracking-widest mb-3">Contato</p>
+          <h2 class="font-display text-4xl font-bold mb-5">Entre em contato</h2>
+          <p class="text-muted-light leading-relaxed mb-8">
+            Tem um projeto em mente ou quer trocar uma ideia? Me mande uma mensagem — responderei em até 24h.
+          </p>
+
+          <div class="space-y-4">
+            <a href="mailto:joao@exemplo.com"
+               class="flex items-center gap-4 p-4 rounded-xl bg-dark-2 border border-white/5 hover:border-accent/30 transition-colors group">
+              <div class="w-10 h-10 rounded-lg bg-accent/15 flex items-center justify-center group-hover:bg-accent/25 transition-colors">
+                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-muted mb-0.5">Email</p>
+                <p class="text-white text-sm">Visape18@gmail.com</p>
+              </div>
+            </a>
+
+            <a href="https://www.linkedin.com/in/vitor-santos-675784287/" target="_blank"
+               class="flex items-center gap-4 p-4 rounded-xl bg-dark-2 border border-white/5 hover:border-accent/30 transition-colors group">
+              <div class="w-10 h-10 rounded-lg bg-accent/15 flex items-center justify-center group-hover:bg-accent/25 transition-colors">
+                <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-muted mb-0.5">LinkedIn</p>
+                <p class="text-white text-sm">linkedin.com/in/vitorsantos</p>
+              </div>
+            </a>
+
+            <a href="https://github.com/joaosilva" target="_blank"
+               class="flex items-center gap-4 p-4 rounded-xl bg-dark-2 border border-white/5 hover:border-accent/30 transition-colors group">
+              <div class="w-10 h-10 rounded-lg bg-accent/15 flex items-center justify-center group-hover:bg-accent/25 transition-colors">
+                <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-muted mb-0.5">GitHub</p>
+                <p class="text-white text-sm">github.com/joaosilva</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <form class="space-y-4" onsubmit="handleSubmit(event)">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs text-muted mb-1.5">Nome</label>
+              <input type="text" placeholder="Seu nome"
+                     class="w-full px-4 py-3 rounded-xl bg-dark-2 border border-white/10 text-white text-sm placeholder-muted focus:outline-none focus:border-accent/50 transition-colors" />
+            </div>
+            <div>
+              <label class="block text-xs text-muted mb-1.5">Email</label>
+              <input type="email" placeholder="seu@email.com"
+                     class="w-full px-4 py-3 rounded-xl bg-dark-2 border border-white/10 text-white text-sm placeholder-muted focus:outline-none focus:border-accent/50 transition-colors" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs text-muted mb-1.5">Assunto</label>
+            <input type="text" placeholder="Sobre o projeto..."
+                   class="w-full px-4 py-3 rounded-xl bg-dark-2 border border-white/10 text-white text-sm placeholder-muted focus:outline-none focus:border-accent/50 transition-colors" />
+          </div>
+          <div>
+            <label class="block text-xs text-muted mb-1.5">Mensagem</label>
+            <textarea rows="5" placeholder="Descreva seu projeto ou ideia..."
+                      class="w-full px-4 py-3 rounded-xl bg-dark-2 border border-white/10 text-white text-sm placeholder-muted focus:outline-none focus:border-accent/50 transition-colors resize-none"></textarea>
+          </div>
+          <button type="submit"
+                  class="w-full py-3.5 rounded-xl bg-accent hover:bg-accent-dark text-white font-medium transition-all hover:shadow-lg hover:shadow-accent/25 flex items-center justify-center gap-2">
+            Enviar mensagem
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="py-8 bg-dark-2 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="font-display font-bold text-lg">
+        <span class="gradient-text">VT</span><span class="text-white">.</span>
+      </p>
+      <p class="text-muted text-sm">© 2026 Vitor dos Santos. Feito com 💙 e muito café.</p>
+      <div class="flex items-center gap-5 text-sm text-muted-light">
+        <a href="#sobre" class="hover:text-white transition-colors">Sobre</a>
+        <a href="#servicos" class="hover:text-white transition-colors">Serviços</a>
+        <a href="#contato" class="hover:text-white transition-colors">Contato</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.section-reveal').forEach(el => observer.observe(el));
+
+    // Form submit mock
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type=submit]');
+      btn.textContent = '✓ Mensagem enviada!';
+      btn.classList.add('bg-green-600');
+      btn.classList.remove('bg-accent', 'hover:bg-accent-dark');
+      setTimeout(() => {
+        btn.innerHTML = 'Enviar mensagem <svg class="w-4 h-4 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>';
+        btn.classList.remove('bg-green-600');
+        btn.classList.add('bg-accent', 'hover:bg-accent-dark');
+        e.target.reset();
+      }, 3000);
+    }
+
+    // Smooth active nav state
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
